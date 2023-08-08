@@ -33,7 +33,7 @@ pipeline {
                     sh "echo ${AMI_NAME}"
                     sh "echo ${env.AMI_NAME}"
                     // Replace AMI reference in data_source.tf with the specified AMI_NAME
-                    sh "sed -i 's/ami_requirements.v9/${env.AMI_NAME}/g' data_source.tf"
+                    sh "sed -i 's/base-image/${env.AMI_NAME}/g' data_source.tf"
                     sh 'terraform plan' // Generate and show the Terraform plan
                 }
             }
@@ -83,7 +83,7 @@ pipeline {
             steps {
                 dir('terraform') {
                     // Replace AMI reference in data_source.tf for destroy operation
-                    sh "sed -i 's/ami_requirements.v9/${env.AMI_NAME}/g' data_source.tf"
+                    sh "sed -i 's/base-image/${env.AMI_NAME}/g' data_source.tf"
                     sh 'terraform destroy -auto-approve' // Execute Terraform destroy
                 }
             }
