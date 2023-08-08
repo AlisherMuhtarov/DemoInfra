@@ -20,7 +20,7 @@ pipeline {
                 dir('terraform') {
                     sh "echo ${AMI_NAME}"
                     sh "echo ${env.AMI_NAME}"
-                    sh "sed -i 's/demo_ami/${env.AMI_NAME}/g' data_source.tf"
+                    sh "sed -i 's/base-image/${env.AMI_NAME}/g' data_source.tf"
                     sh 'terraform plan'
                 }
             }
@@ -55,7 +55,7 @@ pipeline {
             }
             steps {
                 dir('terraform') {
-                    sh "sed -i 's/demo_ami/${env.AMI_NAME}/g' data_source.tf"
+                    sh "sed -i 's/base-image/${env.AMI_NAME}/g' data_source.tf"
                     sh 'terraform destroy -auto-approve'
                 }
             }
